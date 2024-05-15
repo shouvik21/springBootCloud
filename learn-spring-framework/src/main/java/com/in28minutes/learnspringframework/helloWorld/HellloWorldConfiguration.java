@@ -1,7 +1,9 @@
-package com.in28minutes.learnspringframework;
+package com.in28minutes.learnspringframework.helloWorld;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 //release in jdk 16
 //eliminate verbosity in creating java beans
@@ -26,8 +28,15 @@ public class HellloWorldConfiguration {
     }
 
     @Bean(name = "address2")// naming a bean customly
+    @Primary
     public Address address(){
         return new Address("Bakers Street", "London");
+    }
+
+    @Bean(name = "address3")// naming a bean customly
+    @Qualifier("addresss3qualifier")
+    public Address address1(){
+        return new Address("Kolkata", "India");
     }
 
     @Bean
@@ -36,7 +45,14 @@ public class HellloWorldConfiguration {
     }
 
     @Bean
+    @Primary
     public Person person3parameteres(String name, int age, Address address2){ //name of bean should be variable name
+        return new Person(name,age,address2);
+    }
+
+    @Bean
+    @Qualifier("addresss3qualifier")
+    public Person person5Qualifier(String name, int age, Address address2){ //name of bean should be variable name
         return new Person(name,age,address2);
     }
 
